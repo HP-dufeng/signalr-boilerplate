@@ -1,0 +1,63 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+
+    <title>SignalR Starter Template</title>
+
+    <script src="scripts/jquery-1.10.2.js"></script>
+    <script src="scripts/jquery.signalR-2.2.2.js"></script>
+    <script src="http://localhost:6789/api/manage/signalr/hubs"></script>
+  </head>
+
+  <body>
+    
+    <div class="container">
+      <h1>hello</h1>
+
+    </div><!-- /.container -->
+
+
+
+
+    <script>
+      $(function () {
+        var access_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6ImEzck1VZ01Gdjl0UGNsTGE2eUYzekFrZnF1RSIsImtpZCI6ImEzck1VZ01Gdjl0UGNsTGE2eUYzekFrZnF1RSJ9.eyJpc3MiOiJodHRwOi8vd3VjYy53ZHFoLmNvbTo2Nzg5L2lkZW50aXR5IiwiYXVkIjoiaHR0cDovL3d1Y2Mud2RxaC5jb206Njc4OS9pZGVudGl0eS9yZXNvdXJjZXMiLCJleHAiOjE1MTU3NDc1NjMsIm5iZiI6MTUxNTc0Mzk2MywiY2xpZW50X2lkIjoiV3BicyIsInNjb3BlIjpbIm9mZmxpbmVfYWNjZXNzIiwib3BlbmlkIiwicHJvZmlsZSIsInJvbGVzIiwicnNfdXNlckluZm8iXSwic3ViIjoiN2RhNzY0NGItZTc4ZC00Njg3LWEwMTItMGU5ZmY1YzdkOTE3IiwiYXV0aF90aW1lIjoxNTE1NzQzOTYzLCJpZHAiOiJpZHNydiIsInByZWZlcnJlZF91c2VybmFtZSI6Imltc3MiLCJyb2xlIjpbIldQQlNfQ2xpZW50U2Vjb25kU2VhdE1hbmFnZXxBZGQiLCJXUEJTX01lbnVSb2xlIiwiV1BCU19JTU1TIiwiV1BCU19DaGFuZ2VMb2ciLCJXUEJTX1JldHVyblNldHRpbmciLCJXUEJTX0NsaWVudFNlY29uZFNlYXRNYW5hZ2UiLCJXUEJTX09wZXJhdGlvbkxvZyIsIldQQlNfV2l0aGRyYXdTZXR0aW5nIiwiV1BCU19XaXRoZHJhd01hbmFnZSIsIldQQlNfRGljdGlvbmFyaWVzIiwiV1BCU19DbGllbnRTZWNvbmRTZWF0TWFuYWdlfEVkaXQiLCJXUEJTX0NsaWVudFNlY29uZFNlYXRNYW5hZ2V8R2V0IiwiV1BCU19DbGllbnRTZWNvbmRTZWF0TWFuYWdlfERlbGV0ZSIsIldQQlNfTWVzc2FnZU1hbmFnZSJdLCJGdWxsTmFtZSI6IuasoeW4reeuoeeQhuezu-e7nyIsIm5hbWUiOiJpbXNzIiwiU2FsZXNEZXBhcnRtZW50Ijoi5byA5Y-RIiwiYW1yIjpbInBhc3N3b3JkIl19.olc7opX2FVFUgB1ByR5TlumH0Tdy00Zi2CgXFcq18BODFceHgbQ0IoLPxLEcliYys448iHhW14UaXbGRs3eVOtfi6jjMR4L-toEcE0esQbR_FHwzM_6XWpqgW8Jzrle-hRonrEBNpZF44eGfzzPNzrJ0G26zmmTOqQsY76j1K9zjtuNZeEjfmHxtVYXbFYfDaTWqOkRzNmHXst16fr_PUVfQAHZYDI1iOQbX-ThzALiLKiRX--IMYv4YdYsGHu7ioUMWFkdqo4R4iLYKaRiJ3fG6ySqCZVgyVhYmXRiz5Q_uy_kOIkPaFXDuQWm9VWXj9j6DqMyM2NltO2Uc3r4HmQ";
+
+        // Declare a proxy to reference the hub.
+        var chat = $.connection.abpCommonHub;
+        $.connection.hub.url="http://localhost:6789/api/manage/signalr";
+        $.connection.hub.qs = "access_token=" + encodeURIComponent(access_token);
+
+        chat.client.getNotification = function (notification) {
+          console.log("Received!")
+          console.log(notification)
+        }
+
+        $.connection.hub.start().done(function () {
+          console.log(3333)
+          chat.server.register().done(function () {
+            console.log('Registered to the SignalR server!');
+          });
+        });
+
+        // var chat = $.connection.chatHub;
+        // $.connection.hub.url="http://localhost:52527/signalr";
+
+        // chat.client.broadcastMessage = function (name, message) {
+        //   console.log(name + ": " + message)
+        // }
+        
+        // $.connection.hub.start().done(function () {
+        //   console.log(3333)
+        // });
+
+      })
+    </script>
+  </body>
+</html>
